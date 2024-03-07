@@ -1,6 +1,7 @@
 torch
 torchvision
 onnx
+onnxruntime
 timm
 fvcore
 opencv_python
