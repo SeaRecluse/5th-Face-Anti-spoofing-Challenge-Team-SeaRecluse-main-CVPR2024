@@ -1,4 +1,4 @@
-# 4th Chalearn Face Anti-spoofing Workshop and Challenge@CVPR2023 —— Team SeaRecluse
+# 5th Chalearn Face Anti-spoofing Workshop and Challenge@CVPR2024 —— Team SeaRecluse
 
 ## Step
 ### Install dependencies:
@@ -37,7 +37,7 @@ If you have full content data data, it should look like this in the folder
     -data_sorting.py
     -data_processing.py
     -data_handle.sh
-    -scrfd*
+    -detect*
 
 ```
 Execute data_handle.sh for data sorting and preprocessing
