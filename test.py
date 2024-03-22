@@ -54,25 +54,6 @@ def clearRes(save_path):
     if os.path.exists(save_path):
         os.remove(save_path)
 
-def imgRecover(img, bad_size=256):
-    H, W, _ = img.shape
-    if H == bad_size and W == bad_size:
-        new_height = H + H % 9
-        new_width = int(new_height / 9 * 16)
-        img = cv2.resize(img, (new_width, new_height), cv2.INTER_CUBIC)
-    return img
-
-def checkCrop(img, area = 1000 * 700):
-    H, W, _ = img.shape
-    if H * W > area:
-        return True
-    
-    if H % 9 == 0 and W % 16 == 0:
-        if H // 9 == W // 16:
-            return True
-    
-    return False
-
 def writeRes(load_path, data_type, dim_txt, model, save_path, use_tta=True):
     line_list = []
     with open(os.path.join(load_path, data_type, dim_txt), "r") as f:
@@ -83,15 +64,6 @@ def writeRes(load_path, data_type, dim_txt, model, save_path, use_tta=True):
         per_line = line_list[n].replace("\n", "")
         if per_line:
             img = cv2.imread(load_path + per_line)
-            
-            img = imgRecover(img)
-            if checkCrop(img):
-                area_x1 = int(0.4 * img.shape[1])
-                area_x2 = int(0.6 * img.shape[1])
-                area_y1 = int(0.27 * img.shape[0])
-                area_y2 = int(0.73 * img.shape[0])
-                img =img[area_y1:area_y2,area_x1:area_x2]
-
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
             output = getPred(img, data_type, model)
